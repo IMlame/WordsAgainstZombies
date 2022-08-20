@@ -28,7 +28,7 @@ func _ready():
 func _on_button_pushed(button_name: String):
 	match button_name:
 		"Start Game":
-			print("start game")
+			get_tree().change_scene("res://src/SaveScene/SaveScene.tscn")
 		"Settings":
 			print("settings")
 		"Quit":
