@@ -7,7 +7,7 @@ var CardSelected = []
 onready var DeckSize = Deck.DeckList.size()
 
 #Getting position to put in hand after draw
-onready var CenterCardOval = get_viewport().size * Vector2(0.5, 1.25)
+onready var CenterCardOval = get_viewport().size * Vector2(0.5, 1.33)
 onready var Hor_rad = get_viewport().size.x * 0.55
 onready var Ver_rad = get_viewport().size.y * 0.4
 var angle = 0
@@ -23,6 +23,9 @@ enum {
 	MoveDrawnCardToHand
 	ReOrganizeHand
 }
+
+func _ready():
+		randomize()
 
 func drawcard():
 	angle = PI/2 + CardSpread*(float(NumberCardsHand)/2 - NumberCardsHand)
@@ -58,3 +61,7 @@ func drawcard():
 	NumberCardsHand += 1
 	Card_Numb += 1
 	return DeckSize
+
+func resetraise():
+	for i in range(Card_Numb):
+		$Cards.get_child(i).raise()

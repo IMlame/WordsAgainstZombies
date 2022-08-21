@@ -11,8 +11,8 @@ script = ExtResource( 4 )
 [node name="Cards" type="Node" parent="."]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 962, 542.5 )
-scale = Vector2( 2.0021, 1.99815 )
+position = Vector2( 953, 542 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="Deck" type="Node2D" parent="."]

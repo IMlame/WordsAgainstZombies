@@ -40,17 +40,17 @@ func _ready():
 	var CardSize = rect_size
 	rect_position = Vector2(-500,-500)
 	rect_scale *= CardSize/$Card.texture.get_size()*1.8
-	$Focus.rect_scale *= CardSize/$Focus.rect_size*2
+	$Focus.rect_scale *= CardSize/$Focus.rect_size*1.5
 	
 	var Damage = str(CardInfo[0])
 	var Word = str(CardInfo[1])
 	var Draw = str(CardInfo[2])
 	var Description = CardInfo[3]
-	$Bar/TopBar/Damage/HBoxContainer/Damage.text = Damage
-	$Bar/MidBar/CardName/HBoxContainer/CardName.text = Cardname
-	$Bar/MidBar2/Description/CenterContainer/Description.text = Description
-	$Bar/BotBar/Word/HBoxContainer/Word.text = Word
-	$Bar/BotBar/Draw/HBoxContainer/Draw.text = Draw
+	$Card/Bar/TopBar/Damage/HBoxContainer/Damage.text = Damage
+	$Card/Bar/MidBar/CardName/HBoxContainer/CardName.text = Cardname
+	$Card/Bar/MidBar2/Description/CenterContainer/Description.text = Description
+	$Card/Bar/BotBar/Word/HBoxContainer/Word.text = Word
+	$Card/Bar/BotBar/Draw/HBoxContainer/Draw.text = Draw
 	
 func _physics_process(delta):
 	match state:
@@ -61,9 +61,8 @@ func _physics_process(delta):
 		InMouse:
 			pass
 		FocusInHand:
-			raise()
 			focuspos = targetpos
-			focuspos.y = 580
+			focuspos.y = 530
 			if setup:
 				Setup()
 			if t<=1:
@@ -156,7 +155,10 @@ func _on_Focus_mouse_entered():
 	match state:
 		InHand, ReOrganizeHand:
 			state = FocusInHand
+			$Card.z_index = 1
+			
 func _on_Focus_mouse_exited():
 	match state:
 		FocusInHand:
 			state = ReOrganizeHand
+			$Card.z_index = 0
