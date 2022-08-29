@@ -6,7 +6,6 @@ extends Label
 #	text = title
 	
 func _ready():
-	print('ready')
 	pass
 
 

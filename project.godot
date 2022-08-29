@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "CardData",
+"language": "GDScript",
+"path": "res://src/Global/CardData.gd"
+} ]
+_global_script_class_icons={
+"CardData": ""
+}
+
 [application]
 
 config/name="WordsAgaisntZombies"
@@ -16,7 +26,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://src/global.gd"
+Saver="*res://src/Global/Saver.gd"
+Sizer="*res://src/Global/Sizer.gd"
 
 [display]
 
