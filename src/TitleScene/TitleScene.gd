@@ -25,6 +25,8 @@ func _ready():
 	quit_label.init("Quit")
 	add_child(quit_label)
 	quit_label.connect("title_screen_button_pushed", self, "_on_button_pushed")
+	
+	_change_background()
 
 func _on_button_pushed(button_name: String):
 	match button_name:
@@ -36,7 +38,5 @@ func _on_button_pushed(button_name: String):
 			get_tree().quit()
 			
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _change_background():
+	$Node2D2/TextureRect.texture = load("res://assets/Background/background2.jpg")
