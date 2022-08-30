@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Roboto-Black.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/TitleScene/TitleScene.gd" type="Script" id=2]
-[ext_resource path="res://assets/Background/background.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/Background/background1.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100

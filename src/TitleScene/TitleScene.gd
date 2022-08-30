@@ -35,8 +35,3 @@ func _on_button_pushed(button_name: String):
 		"Quit":
 			get_tree().quit()
 			
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
