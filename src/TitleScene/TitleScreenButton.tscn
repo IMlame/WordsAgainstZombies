@@ -25,9 +25,11 @@ func _on_Button_pressed():
 
 func _on_Button_mouse_entered():
 	$Button.rect_scale = Vector2(1.1, 1.1)
+	get_tree().get_root().get_node(\"Node2D/Node2D2/TextureRect\").texture = load(\"res://assets/Background/background2.png\")
 
 func _on_Button_mouse_exited():
 	$Button.rect_scale = Vector2(1, 1)
+	get_tree().get_root().get_node(\"Node2D/Node2D2/TextureRect\").texture = load(\"res://assets/Background/background1.png\")
 "
 
 [sub_resource type="DynamicFont" id=2]
