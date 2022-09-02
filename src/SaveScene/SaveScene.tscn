@@ -2,5 +2,5 @@
 
 [ext_resource path="res://src/SaveScene/SaveScene.gd" type="Script" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="SaveScene" type="Node2D"]
 script = ExtResource( 1 )

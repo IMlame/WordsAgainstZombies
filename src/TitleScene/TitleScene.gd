@@ -8,7 +8,6 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	
 	var start_game_label = titleScreenLabel.instance()
-
 	start_game_label.position = Vector2(Sizer.percent_width(5), Sizer.percent_height(55))
 	start_game_label.init("Start Game")
 	add_child(start_game_label)
