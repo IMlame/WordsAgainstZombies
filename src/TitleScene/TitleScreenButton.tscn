@@ -25,18 +25,18 @@ func _on_Button_pressed():
 
 func _on_Button_mouse_entered():
 	$Button.rect_scale = Vector2(1.1, 1.1)
-	get_tree().get_root().get_node(\"Node2D/Node2D2/TextureRect\").texture = load(\"res://assets/Background/background2.png\")
+	get_tree().get_root().get_node(\"TitleScene/Background/TextureRect\").texture = load(\"res://assets/Background/background2.png\")
 
 func _on_Button_mouse_exited():
 	$Button.rect_scale = Vector2(1, 1)
-	get_tree().get_root().get_node(\"Node2D/Node2D2/TextureRect\").texture = load(\"res://assets/Background/background1.png\")
+	get_tree().get_root().get_node(\"TitleScene/Background/TextureRect\").texture = load(\"res://assets/Background/background1.png\")
 "
 
 [sub_resource type="DynamicFont" id=2]
 size = 70
 font_data = ExtResource( 1 )
 
-[node name="Node2D" type="Node2D"]
+[node name="TitleScreenButton" type="Node2D"]
 script = SubResource( 1 )
 
 [node name="Button" type="Button" parent="."]
