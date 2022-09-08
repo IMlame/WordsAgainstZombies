@@ -8,3 +8,5 @@ margin_bottom = 25.0
 rect_scale = Vector2( 3, 3 )
 text = "Buy 5"
 script = ExtResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_BuyButton_pressed"]
