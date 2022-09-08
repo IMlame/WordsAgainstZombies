@@ -5,6 +5,7 @@ const POOL = preload("res://assets/Pools/TempShopPool.gd")
 var gold = 105
 var price_scalar = 2
 var starting_price = 5
+var num_card = 3
 onready var buttons = get_tree().get_nodes_in_group("BuyButtons")
 
 func _ready():
@@ -19,17 +20,21 @@ func _ready():
 #	print($Cards.get_child(0).get_child(0).rect_position)
 	
 	# Initialize cards
-#	for i in range(3):
-#		for j in range(3):
-#			var card = CARDBASE.instance()
-#			card.Cardname = POOL.CARDLIST[randi() % POOL.SIZE]
-#			card.rect_position = Vector2(i * 400 + 200, 200 + 200 * j)
-#			$Cards.get_child(i).add_child(card)
+	for i in range(3):
+		var selected_card = POOL.CARDLIST[randi() % POOL.SIZE]
+		for j in range(num_card):
+			var card = CARDBASE.instance()
+			card.Cardname = selected_card
+			$Cards.get_child(i).add_child(card)
+			card.rect_scale = Vector2(1,1)
+			card.rect_position = Vector2(i * (card.get_node("Card").texture.get_size().x + 150) + 200, 
+									200 + card.get_node("Card/Bar/TopBar").rect_size.y * j)
 
 func _on_BuyButton1_pressed(price: int):
 	# If price isn't null (0), then buy card and update the gold
 	if price > 0 and gold >= price:
 		set_gold(gold - price)
+		$Cards/Slot1.get_child(num_card - 1 - $BuyButton1.count).queue_free()
 		$BuyButton1.count += 1
 		if $BuyButton1.count < $BuyButton1.MAX_COUNT:
 			$BuyButton1.scale_price(price_scalar)
@@ -41,6 +46,7 @@ func _on_BuyButton2_pressed(price: int):
 	# If price isn't null (0), then buy card and update the gold
 	if price > 0 and gold >= price:
 		set_gold(gold - price)
+		$Cards/Slot2.get_child(num_card - 1 - $BuyButton2.count).queue_free()
 		$BuyButton2.count += 1
 		if $BuyButton2.count < $BuyButton2.MAX_COUNT:
 			$BuyButton2.scale_price(price_scalar)
@@ -54,6 +60,7 @@ func _on_BuyButton3_pressed(price: int):
 	# If price isn't null (0), then buy card and update the gold
 	if price > 0 and gold >= price:
 		set_gold(gold - price)
+		$Cards/Slot3.get_child(num_card - 1 - $BuyButton3.count).queue_free()
 		$BuyButton3.count += 1
 		if $BuyButton3.count < $BuyButton3.MAX_COUNT:
 			$BuyButton3.scale_price(price_scalar)
