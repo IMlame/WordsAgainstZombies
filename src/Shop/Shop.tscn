@@ -52,6 +52,6 @@ margin_bottom = 950.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
-[connection signal="pressed" from="BuyButton1" to="." method="_on_BuyButton1_pressed"]
-[connection signal="pressed" from="BuyButton2" to="." method="_on_BuyButton2_pressed"]
-[connection signal="pressed" from="BuyButton3" to="." method="_on_BuyButton3_pressed"]
+[connection signal="my_price" from="BuyButton1" to="." method="_on_BuyButton1_my_price"]
+[connection signal="my_price" from="BuyButton2" to="." method="_on_BuyButton2_my_price"]
+[connection signal="my_price" from="BuyButton3" to="." method="_on_BuyButton3_my_price"]
