@@ -18,29 +18,37 @@ position = Vector2( 1695, 494 )
 scale = Vector2( 2.53488, 2.62766 )
 texture = ExtResource( 2 )
 
-[node name="BuyButton1" parent="." instance=ExtResource( 4 )]
-margin_left = 166.0
-margin_top = 576.0
-margin_right = 246.0
-margin_bottom = 601.0
+[node name="Cards" type="Node" parent="."]
 
-[node name="BuyButton2" parent="." instance=ExtResource( 4 )]
-margin_left = 886.0
-margin_top = 574.0
-margin_right = 966.0
-margin_bottom = 599.0
+[node name="Slot1" type="Node" parent="Cards"]
 
-[node name="BuyButton3" parent="." instance=ExtResource( 4 )]
-margin_left = 544.0
-margin_top = 570.0
-margin_right = 624.0
-margin_bottom = 595.0
+[node name="Slot2" type="Node" parent="Cards"]
+
+[node name="Slot3" type="Node" parent="Cards"]
+
+[node name="BuyButton1" parent="." groups=["BuyButtons"] instance=ExtResource( 4 )]
+margin_left = 200.0
+margin_top = 900.0
+margin_right = 280.0
+margin_bottom = 925.0
+
+[node name="BuyButton2" parent="." groups=["BuyButtons"] instance=ExtResource( 4 )]
+margin_left = 600.0
+margin_top = 900.0
+margin_right = 680.0
+margin_bottom = 925.0
+
+[node name="BuyButton3" parent="." groups=["BuyButtons"] instance=ExtResource( 4 )]
+margin_left = 1000.0
+margin_top = 900.0
+margin_right = 1080.0
+margin_bottom = 925.0
 
 [node name="Gold" type="Label" parent="."]
 margin_left = 1512.0
-margin_top = 880.0
+margin_top = 900.0
 margin_right = 1612.0
-margin_bottom = 930.0
+margin_bottom = 950.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 
