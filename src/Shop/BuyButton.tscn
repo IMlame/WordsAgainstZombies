@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Shop/BuyButton.gd" type="Script" id=1]
+
+[node name="BuyButton" type="Button"]
+margin_right = 80.0
+margin_bottom = 25.0
+rect_scale = Vector2( 3, 3 )
+text = "Buy 5"
+script = ExtResource( 1 )
