@@ -3,7 +3,7 @@ extends MarginContainer
 
 onready var CardDatabase = preload("res://assets/Cards/CardDatabase.gd")
 var Cardname = 'A'
-onready var CardInfo = CardDatabase.DATA[CardDatabase.get(Cardname)]
+onready var CardInfo = CardDatabase.DATA[Cardname]
 var startpos = Vector2()
 var targetpos = Vector2()
 var focuspos = Vector2()
