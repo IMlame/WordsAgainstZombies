@@ -4,7 +4,9 @@ var button_num
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	
+
+# test if a save exists with the same number as the button. if so, display current stage reached
+# if not, display "NEW GAME"
 func set_button_num(button_num: int):
 	self.button_num = button_num
 	var save_exists = Saver.load_data(button_num)
