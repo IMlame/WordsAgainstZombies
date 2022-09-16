@@ -2,7 +2,7 @@ extends Node
 
 const SAVE_DIR = "user://saves/"
 
-const CardDataClass = preload("res://src/Global/CardData.gd")
+const CardDataClass = preload("res://src/global/CardData.gd")
 
 var chosen_save = -1
 
@@ -21,7 +21,7 @@ var letter_info = {}
 
 func _ready():
 	var card = CardDataClass.new("a", 1, 2, 3, [])
-	letter_info[card.letter] = card
+	letter_info[card.name] = card
 
 func save_data():
 	if chosen_save != -1:
@@ -64,7 +64,7 @@ func save_data():
 		print("error: no chose chosen")
 	
 func load_data(save_num: int):
-	if save_num > 0 and save_num < 4:
+	if save_num >= 0 and save_num < 4:
 		chosen_save = save_num
 		var file = File.new()
 		if file.file_exists(SAVE_DIR + "save_" + str(chosen_save) + ".txt"):
