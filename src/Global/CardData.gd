@@ -40,11 +40,11 @@ func _to_string():
 				"effects": effects, "keywords": keywords})
 
 static func sort_name_ascending(a: CardData,b: CardData):
-	if a.name.length == 1 and b.name.length == 1:
+	if a.name.length() == 1 and b.name.length() == 1:
 		return a.name <= b.name
-	elif a.name.length == 1 and b.name.length != 1:
+	elif a.name.length() == 1 and b.name.length() != 1:
 		return true
-	elif a.name.length != 1 and b.name.length == 1:
+	elif a.name.length() != 1 and b.name.length() == 1:
 		return false
 	else:
 		if a.name == "Wild":
