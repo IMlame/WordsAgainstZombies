@@ -1,7 +1,7 @@
 extends Node2D
 
-const CARDBASE = preload("res://src/Battle/Cards/CardBase.tscn")
-const POOL = preload("res://assets/Pools/TempShopPool.gd") 
+const CARDBASE = preload("res://src/cards/CardBase.tscn")
+const POOL = preload("res://assets/pools/TempShopPool.gd") 
 var gold = 105
 var price_scalar = 2
 var starting_price = 5
@@ -16,9 +16,11 @@ func _ready():
 	# Initialize cards
 	for i in range(3):
 		var selected_card = POOL.CARDLIST[randi() % POOL.SIZE]
+		var card_data = CardData.new()
+		card_data.load_default(selected_card)
 		for j in range(num_card):
 			var card = CARDBASE.instance()
-			card.Cardname = selected_card
+			card.set_card_data(card_data)
 			$Cards.get_child(i).add_child(card)
 			card.rect_scale = Vector2(1,1)
 			card.rect_position = Vector2(i * (card.get_node("Card").texture.get_size().x + 150) + 200, 
@@ -32,11 +34,11 @@ func _on_BuyButton1_my_price(price):
 		$BuyButton1.count += 1
 		if $BuyButton1.count < $BuyButton1.MAX_COUNT:
 			$BuyButton1.scale_price(price_scalar)
-			$BuyButton1.text = "Buy " + $BuyButton1.price as String
+			$BuyButton1.set_text("Buy " + $BuyButton1.price as String)
 		else:
-			$BuyButton1.text = "Sold out"
+			$BuyButton1.set_text("Sold out")
 				
-	$Gold.text = gold as String
+	$Gold.set_text(gold as String)
 
 # Update Player's gold based on price of the card
 func _on_BuyButton2_my_price(price):
@@ -47,11 +49,11 @@ func _on_BuyButton2_my_price(price):
 		$BuyButton2.count += 1
 		if $BuyButton2.count < $BuyButton2.MAX_COUNT:
 			$BuyButton2.scale_price(price_scalar)
-			$BuyButton2.text = "Buy " + $BuyButton2.price as String
+			$BuyButton2.set_text("Buy " + $BuyButton2.price as String)
 		else:
-			$BuyButton2.text = "Sold out"
+			$BuyButton2.set_text("Sold out")
 				
-	$Gold.text = gold as String
+	$Gold.set_text(gold as String)
 
 # Update Player's gold based on price of the card
 func _on_BuyButton3_my_price(price):
@@ -62,14 +64,16 @@ func _on_BuyButton3_my_price(price):
 		$BuyButton3.count += 1
 		if $BuyButton3.count < $BuyButton3.MAX_COUNT:
 			$BuyButton3.scale_price(price_scalar)
-			$BuyButton3.text = "Buy " + $BuyButton3.price as String
+			$BuyButton3.set_text("Buy " + $BuyButton3.price as String)
 		else:
-			$BuyButton3.text = "Sold out"
+			$BuyButton3.set_text("Sold out")
+			
+	$Gold.set_text(gold as String)
 
 # Set player's gold
 func set_gold(gold: int):
 	self.gold = gold
-	$Gold.text = gold as String
+	$Gold.set_text(gold as String)
 
 # Set starting price of the shop
 func set_starting_price(price: int):
@@ -80,7 +84,3 @@ func set_starting_price(price: int):
 # Update price scalar of the shop
 func set_price_scalar(scalar: int):
 	price_scalar = scalar
-
-
-
-

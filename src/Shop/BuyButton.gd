@@ -22,5 +22,5 @@ func scale_price(scalar: int):
 	
 func set_starting_price(new_price: int):
 	price = new_price
-	text = "Buy " + price as String
+	$".".set_text("Buy " + price as String)
 	

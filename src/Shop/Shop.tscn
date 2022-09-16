@@ -2,8 +2,8 @@
 
 [ext_resource path="res://assets/temp_peter/shop.jpg" type="Texture" id=1]
 [ext_resource path="res://assets/temp_peter/shopkeeper.jpg" type="Texture" id=2]
-[ext_resource path="res://src/Shop/Shop.gd" type="Script" id=3]
-[ext_resource path="res://src/Shop/BuyButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/shop/Shop.gd" type="Script" id=3]
+[ext_resource path="res://src/shop/BuyButton.tscn" type="PackedScene" id=4]
 
 [node name="Screen" type="Node2D"]
 script = ExtResource( 3 )
