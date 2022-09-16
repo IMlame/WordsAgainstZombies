@@ -16,9 +16,11 @@ func _ready():
 	# Initialize cards
 	for i in range(3):
 		var selected_card = POOL.CARDLIST[randi() % POOL.SIZE]
+		var card_data = CardData.new()
+		card_data.load_default(selected_card)
 		for j in range(num_card):
 			var card = CARDBASE.instance()
-			card.card_name = selected_card
+			card.set_card_data(card_data)
 			$Cards.get_child(i).add_child(card)
 			card.rect_scale = Vector2(1,1)
 			card.rect_position = Vector2(i * (card.get_node("Card").texture.get_size().x + 150) + 200, 
