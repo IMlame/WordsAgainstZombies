@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "CardData",
 "language": "GDScript",
-"path": "res://src/Global/CardData.gd"
+"path": "res://src/global/CardData.gd"
 } ]
 _global_script_class_icons={
 "CardData": ""
@@ -21,13 +21,13 @@ _global_script_class_icons={
 [application]
 
 config/name="WordsAgaisntZombies"
-run/main_scene="res://src/TitleScene/TitleScene.tscn"
+run/main_scene="res://src/title_scene/TitleScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Saver="*res://src/Global/Saver.gd"
-Sizer="*res://src/Global/Sizer.gd"
+Saver="*res://src/global/Saver.gd"
+Sizer="*res://src/global/Sizer.gd"
 
 [display]
 

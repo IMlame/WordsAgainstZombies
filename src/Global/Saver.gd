@@ -2,7 +2,7 @@ extends Node
 
 const SAVE_DIR = "user://saves/"
 
-const CardDataClass = preload("res://src/Global/CardData.gd")
+const CardDataClass = preload("res://src/global/CardData.gd")
 
 var chosen_save = -1
 
@@ -21,7 +21,7 @@ var letter_info = {}
 
 func _ready():
 	var card = CardDataClass.new("a", 1, 2, 3, [])
-	letter_info[card.letter] = card
+	letter_info[card.name] = card
 
 func save_data():
 	if chosen_save != -1:

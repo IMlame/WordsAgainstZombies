@@ -2,26 +2,31 @@ extends Reference
 
 class_name CardData
 
-var letter = null
+var name = null
 var damage = 0
 var draw_count = 0
 var word_count = 0
 var attributes = null
+var keywords = null
 
 enum {
-	LETTER,
+	NAME,
 	DAMAGE,
 	DRAW_COUNT,
 	WORD_COUNT,
-	ATTRIBUTES
+	ATTRIBUTES,
+	KEYWORDS
 }
 
-func _init(letter = null, damage = 0, draw_count = 0, word_count = 0, attributes = null):
-	self.letter = letter
+func _init(name = null, damage = 0, draw_count = 0, word_count = 0, attributes = ["potato", "owo"], 
+			keywords = null):
+	self.name = name
 	self.damage = damage
 	self.draw_count = draw_count
 	self.word_count = word_count
-	self.attributes = ["potato", "owo"]
+	self.attributes = attributes
+	self.keywords = keywords
 
 func _to_string():
-	return str({"damage": damage, "draw_count": draw_count, "word_count": word_count, "attributes": attributes})
+	return str({"name": name, "damage": damage, "draw_count": draw_count, "word_count": word_count, 
+				"attributes": attributes, "keywords": keywords})
