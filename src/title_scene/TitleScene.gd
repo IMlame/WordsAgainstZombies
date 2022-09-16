@@ -4,9 +4,9 @@ extends Node2D
 var titleScreenLabel = load("res://src/title_scene/TitleScreenButton.tscn")
 onready var buttons = get_tree().get_nodes_in_group("TitleScreenButtons")
 var screen_size = null
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	screen_size = get_viewport_rect().size
+	# set size of Start Game button, Settings button, and Quit button
 	get_child(2).set_position(Vector2(Sizer.percent_width(5), Sizer.percent_height(55)))
 	get_child(3).set_position(Vector2(Sizer.percent_width(5), Sizer.percent_height(70)))
 	get_child(4).set_position(Vector2(Sizer.percent_width(5), Sizer.percent_height(85)))
@@ -19,7 +19,8 @@ func _on_Settings_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
-
+	
+# changes background when one of the buttons is hoverred
 func _on_Button_Hovered():
 	$Background.texture = load("res://assets/background/background2.png")
 	

@@ -2,13 +2,13 @@ extends Reference
 
 class_name CardData
 
-const DEFAULT = preload("res://assets/Cards/CardDatabase.gd").DATA
-var name = null
+const DEFAULT = preload("res://assets/cards/CardDatabase.gd").DATA
+var name = ""
 var damage = 0
 var draw_count = 0
 var word_count = 0
-var effects = null
-var keywords = null
+var effects = ""
+var keywords = []
 
 enum {
 	NAME,
@@ -19,7 +19,7 @@ enum {
 	KEYWORDS
 }
 
-func _init(name = null, damage = 0, draw_count = 0, word_count = 0, effects = ["potato", "owo"], keywords = null):
+func _init(name = "", damage = 0, draw_count = 0, word_count = 0, effects = "", keywords = []):
 	self.name = name
 	self.damage = damage
 	self.draw_count = draw_count
