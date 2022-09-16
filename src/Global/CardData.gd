@@ -19,7 +19,7 @@ enum {
 	KEYWORDS
 }
 
-func _init(name = "", damage = 0, draw_count = 0, word_count = 0, effects = "", keywords = []):
+func _init(name = "A", damage = 1, draw_count = 0, word_count = 2, effects = "", keywords = []):
 	self.name = name
 	self.damage = damage
 	self.draw_count = draw_count
@@ -38,3 +38,20 @@ func load_default(name):
 func _to_string():
 	return str({"name": name, "damage": damage, "draw_count": draw_count, "word_count": word_count, 
 				"effects": effects, "keywords": keywords})
+
+static func sort_name_ascending(a: CardData,b: CardData):
+	if a.name.length == 1 and b.name.length == 1:
+		return a.name <= b.name
+	elif a.name.length == 1 and b.name.length != 1:
+		return true
+	elif a.name.length != 1 and b.name.length == 1:
+		return false
+	else:
+		if a.name == "Wild":
+			return true
+		elif a.name == "Health" and b.name != "Wild":
+			return true
+		elif a.name == "Word" and b.name != "Wild" and b.name != "Health":
+			return true
+		else:
+			return false
