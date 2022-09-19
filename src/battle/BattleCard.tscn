@@ -3,14 +3,18 @@
 [ext_resource path="res://src/cards/CardBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/battle/BattleCard.gd" type="Script" id=2]
 
-[node name="BattleCard" type="TextureButton"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="BattleCard" type="MarginContainer"]
+margin_right = 250.0
+margin_bottom = 350.0
 script = ExtResource( 2 )
 
 [node name="CardBase" parent="." instance=ExtResource( 1 )]
 
-[connection signal="button_down" from="." to="." method="_on_BattleCard_button_down"]
-[connection signal="focus_entered" from="." to="." method="_on_BattleCard_focus_entered"]
-[connection signal="mouse_entered" from="." to="." method="_on_BattleCard_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_BattleCard_mouse_exited"]
+[node name="Focus" type="TextureButton" parent="."]
+margin_right = 250.0
+margin_bottom = 350.0
+
+[connection signal="button_down" from="Focus" to="." method="_on_Focus_button_down"]
+[connection signal="button_up" from="Focus" to="." method="_on_Focus_button_up"]
+[connection signal="mouse_entered" from="Focus" to="." method="_on_Focus_mouse_entered"]
+[connection signal="mouse_exited" from="Focus" to="." method="_on_Focus_mouse_exited"]
