@@ -2,7 +2,7 @@ extends Node2D
 
 # cards
 const CARDSIZE = Vector2(125,175)
-const CARDBASE = preload("res://src/cards/CardBase.tscn")
+const BATTLECARD = preload("res://src/battle/BattleCard.tscn")
 const DECK = preload("res://src/cards/Deck.gd")
 
 var card_selected = []
@@ -28,7 +28,7 @@ func draw_card():
 	# set up an angle of a card
 	angle = PI/2 + card_spread*(float(number_cards_hand)/2 - number_cards_hand)
 	# initialize a a drawn card
-	var new_card = CARDBASE.instance()
+	var new_card = BATTLECARD.instance()
 	# four lines below are for setting up test cards
 	var card_data = CardData.new()
 	card_selected = DECK.DECKLIST[randi() % deck_size]
