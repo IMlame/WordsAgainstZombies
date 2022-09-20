@@ -1,5 +1,6 @@
 extends MarginContainer
 
+const DEFAULT = preload("res://assets/temp_peter/dictionary.txt").DATA
 onready var card_database = preload("res://assets/cards/CardDatabase.gd")
 onready var card_info = card_database.DATA[card_name]
 
@@ -113,6 +114,12 @@ func setup_position():
 		t = 0
 		setup = false
 			
+
+func string_valid(string: String):
+	
+	
+	return true
+	
 
 func set_card_data(card_data: CardData):
 	damage = card_data.damage
