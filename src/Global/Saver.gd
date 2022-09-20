@@ -16,7 +16,7 @@ var xp_level = 0
 var stage = 0
 var base_damage = 0
 var starting_hand_count = 0
-var letter_count = 0
+var letter_count = 4
 var letter_info = {}
 
 func _ready():
