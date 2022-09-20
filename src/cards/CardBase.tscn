@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/cards/CardBase.gd" type="Script" id=1]
 [ext_resource path="res://comici.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/background/background shade.png" type="Texture" id=3]
-[ext_resource path="res://assets/cards/card.png" type="Texture" id=4]
+[ext_resource path="res://assets/Background/background shade.png" type="Texture" id=3]
+[ext_resource path="res://assets/Cards/card.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40

@@ -3,6 +3,7 @@
 [ext_resource path="res://src/battle/CardSlot.gd" type="Script" id=1]
 [ext_resource path="res://assets/Cards/card.png" type="Texture" id=2]
 
+
 [node name="CardSlot" type="TextureButton"]
 margin_right = 40.0
 margin_bottom = 40.0

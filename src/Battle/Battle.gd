@@ -86,6 +86,14 @@ func _redraw_hand():
 	organize_cards()
 	number_cards_hand += 1
 
+func _validity(string: String):
+	var dic = File.new()
+	dic.open("res://assets/temp_peter/dictionary.txt", File.READ)
+	var lines = dic.get_as_text().split('\n')
+	dic.close()
+	if string.to_upper() in lines:
+		return true
+	return false
 
 func _submit_word():
 	# create array with size of letter slots
