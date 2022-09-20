@@ -48,10 +48,10 @@ func draw_card():
 	new_card.connect("on_slot_filled", self, "_on_hand_count_change")
 	new_card.connect("redraw_hand", self, "_redraw_hand")
 	$Cards.add_child(new_card)
-	new_card.default_display()
-	new_card.focus_detect = true
+	new_card.default_display() # does card animation from deck to hand
+	new_card.focus_detect = true # hovering enlarges card
 	
-	organize_cards()
+	organize_cards() # reorients rest of cards in hand
 	
 	DECK.DECKLIST.erase(card_selected)
 	deck_size -= 1
@@ -70,16 +70,17 @@ func organize_cards():
 				(90 - rad2deg(angle))/4, # default rot
 				Vector2(1, 1)# default scale
 			)
-			card.default_display()
+			card.default_display() # animates card to default place
 			card_numb += 1
 			card.state = 1
 
 func _on_DeckDraw_drawcard():
 	$Deck/DeckDraw.deck_size = draw_card()
 
+# adjusts variable when cards are put into/removed from slots
+# callback method from BattleCard
 func _on_hand_count_change(num_diff: int):
-	number_cards_hand += num_diff
-
+	number_cards_hand += num_diff 
 func _redraw_hand():
 	# scuffed code to make calculations work
 	number_cards_hand -= 1

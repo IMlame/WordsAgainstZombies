@@ -1,10 +1,5 @@
 extends MarginContainer
 
-# refactor
-# hints, focus, 
-onready var card_database = preload("res://assets/cards/CardDatabase.gd")
-onready var card_info = card_database.DATA[card_name]
-
 # Card Data
 var card_name = 'A'
 var damage 
