@@ -13,6 +13,9 @@ var draw_count
 var effects
 var keywords
 
+func set_hint(hint: String):
+	hint_tooltip = hint
+
 func set_card_data(card_data: CardData):
 	damage = card_data.damage
 	card_name = card_data.name

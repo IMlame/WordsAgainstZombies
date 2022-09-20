@@ -15,7 +15,6 @@ func _ready():
 	for i in range(0, len(slots.get_children())):
 		if slots.get_child(i) == self:
 			slot_num = i
-			print(slot_num)
 			
 	var outline = Sprite.new()
 	outline.texture = OUTLINE_TEXTURE
