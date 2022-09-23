@@ -8,9 +8,6 @@ var draw_count
 var effects
 var keywords
 
-func set_hint(hint: String):
-	hint_tooltip = hint
-
 func set_card_data(card_data: CardData):
 	damage = card_data.damage
 	card_name = card_data.name
@@ -23,4 +20,3 @@ func set_card_data(card_data: CardData):
 	$Card/Bar/MidBar2/Description/CenterContainer/Description.set_text(effects)
 	$Card/Bar/BotBar/Word/HBoxContainer/Word.set_text(word_count as String)
 	$Card/Bar/BotBar/Draw/HBoxContainer/Draw.set_text(draw_count as String)
-	print(card_data)

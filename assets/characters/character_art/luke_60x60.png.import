@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/luke_60x60.png-0167564d7a5b49a49283534e84c6d41b.stex"
+path="res://.import/luke_60x60.png-cd024d20dc544ade085c533fa0b91256.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/character_art/luke_60x60.png"
-dest_files=[ "res://.import/luke_60x60.png-0167564d7a5b49a49283534e84c6d41b.stex" ]
+source_file="res://assets/characters/character_art/luke_60x60.png"
+dest_files=[ "res://.import/luke_60x60.png-cd024d20dc544ade085c533fa0b91256.stex" ]
 
 [params]
 

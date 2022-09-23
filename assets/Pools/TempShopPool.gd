@@ -1,3 +1,2 @@
-const CARDLIST = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",
-					"Q","R","S","T","U","V","W","X","Y","Z"]
-const SIZE = 26
+const CARDLIST = ["B","F","P","W"]
+const SIZE = 4
