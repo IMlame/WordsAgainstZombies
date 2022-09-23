@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/cards/deck.png" type="Texture" id=1]
 [ext_resource path="res://assets/background/background1.png" type="Texture" id=2]
+[ext_resource path="res://src/battle/LetterSlots.gd" type="Script" id=3]
 [ext_resource path="res://src/battle/Battle.gd" type="Script" id=4]
 [ext_resource path="res://src/cards/DeckDraw.gd" type="Script" id=5]
+[ext_resource path="res://assets/Battle/enter_button.png" type="Texture" id=6]
+[ext_resource path="res://assets/Battle/enter_button_valid.png" type="Texture" id=7]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="LetterSlots" type="Node" parent="."]
+script = ExtResource( 3 )
 
 [node name="Cards" type="Node" parent="."]
 
@@ -29,4 +35,11 @@ texture_hover = ExtResource( 1 )
 texture_disabled = ExtResource( 1 )
 script = ExtResource( 5 )
 
+[node name="SubmitWord" type="TextureButton" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+
 [connection signal="drawcard" from="Deck/DeckDraw" to="." method="_on_DeckDraw_drawcard"]
+[connection signal="button_down" from="SubmitWord" to="." method="_submit_word"]

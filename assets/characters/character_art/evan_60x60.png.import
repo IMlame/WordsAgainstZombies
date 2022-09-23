@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/evan_60x60.png-62b79fd66fad8b099e31fc4c5dcd54d9.stex"
+path="res://.import/evan_60x60.png-adc72c8da2b3d98c77212b60f7d2a0d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/character_art/evan_60x60.png"
-dest_files=[ "res://.import/evan_60x60.png-62b79fd66fad8b099e31fc4c5dcd54d9.stex" ]
+source_file="res://assets/Characters/character_art/evan_60x60.png"
+dest_files=[ "res://.import/evan_60x60.png-adc72c8da2b3d98c77212b60f7d2a0d9.stex" ]
 
 [params]
 
