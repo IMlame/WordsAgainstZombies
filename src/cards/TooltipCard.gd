@@ -28,10 +28,12 @@ func set_card_data(card_data: CardData):
 	for keyword in card_data.keywords:
 		tooltip += keyword + "\n"
 		tooltip += KEYWORD_DATA[keyword][0]
+	$PopupPanel/Label.set_text(tooltip)
 	update_panel()
 		
 func update_panel():
-	$PopupPanel._set_position(get_global_position() + Vector2(get_size().x,0))
+	# Need to make TooltipCard instance as child of a tree before set_card_data because the line below
+	$PopupPanel._set_position(get_global_position() + Vector2(get_size().x * get_scale().x,0))
 	$PopupPanel/Label.set_size(Vector2($PopupPanel.get_size().x - 10,$PopupPanel/Label.get_line_count() * $PopupPanel/Label.get_line_height() + 20))
 	$PopupPanel.set_size($PopupPanel/Label.get_size() + Vector2(10,20))
 
@@ -45,10 +47,4 @@ func _on_Detect_mouse_exited():
 	hover = false
 
 func _on_Detect_pressed():
-	var card_data = CardData.new()
-	card_data.name = $CardBase.name
-	card_data.damage = $CardBase.damage
-	card_data.effects = $CardBase.effects
-	card_data.word_count = $CardBase.word_count
-	card_data.draw_count = $CardBase.draw_count
-	emit_signal("press_detected", card_data)
+	emit_signal("press_detected", $CardBase.card_data)
