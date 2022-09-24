@@ -2,7 +2,6 @@
 
 [ext_resource path="res://src/shop/BuyButton.gd" type="Script" id=1]
 
-
 [node name="BuyButton" type="Button"]
 margin_right = 80.0
 margin_bottom = 25.0
