@@ -7,9 +7,9 @@ const CardDataClass = preload("res://src/global/CardData.gd")
 var chosen_save = -1
 
 # list of variables important to keep track of in our game
-var character_class = null
-var cur_health = 0
-var max_health = 0
+var character_class = "evan"
+var cur_health = 50
+var max_health = 100
 var gold = 0
 var xp = 0
 var xp_level = 0
