@@ -86,7 +86,80 @@ func _redraw_hand():
 	number_cards_hand -= 1
 	organize_cards()
 	number_cards_hand += 1
+	
+func _validity(string: String):
+	var dic = File.new()
+	dic.open("res://assets/temp_peter/dictionary.txt", File.READ)
+	var lines = dic.get_as_text().split('\n')
+	dic.close()
+	if string.to_upper() in lines:
+		return true
+	return false		
+	
+func _word_resolution(cards,text):
+	var dmgs=0
+	var draws=0
+	var words=0
+	var modifiers=1
+	var word_data={}
+	word_data.persistentEffects=[]
+	for i in range (len(cards)):
+		var card = cards[i].card_data
+		var dmg=card.damage
+		var draw=card.draw_count
+		var word=card.word_count
+		var modifier = 0
+		"""if card.effects == 'Burn':
+			#apply burn
+		if card.effects == 'Freeze':
+			#apply freeze
+		if card.effects == 'Gold':
+			#apply gold
+		if card.effects == 'Heal':
+			#apply heal
+		if card.effects == 'Paralyze':
+			#apply paralyze
+		if card.effects == 'Weaken':
+			#apply weaken
+		if card.effects == 'End Turn':
+			#apply end turn"""
+		if card.effects == '+1 Word if not used in the first slot' and i!=0:
+			word += 1
+		if card.effects == '+200% Damage, -50% Damage to self':
+			modifier += 2
+		if card.effects == '+2 Damage if next to another L':
+			dmg += 2 * ((i!=0 and cards[i-1].card_data.name == 'L')+(i!=len(cards)-1 and cards[i+1].card_data.name == 'L'))
+		if card.effects == '+50% Damage':
+			modifier += 0.5
+		if card.effects == '+2 Damage if O is the only vowel' and _overlap(text, 'O') and not _overlap(text, 'AEIU'): 
+			modifier += 0.5
+		"""if card.effects == 'Draw this Q and another card next turn':
+			modifier += 0.5"""
+		if card.effects == 'End Turn, +100% Damage':
+			modifier += 1
+			#apply end turn
+		if card.effects == '+100% Damage if not at the end of the word' and i!=len(cards)-1:
+			modifier += 1
+		dmgs+=dmg
+		words+=word
+		draws+=draw
+		modifiers+=modifier
+	word_data.dmg=dmgs*modifiers
+	word_data.draw=draws
+	word_data.word=words
+	return word_data
 
+func _is_member(string, key):
+	for i in range(0, string.length()):
+		if key == string[i]:
+			return true
+	return false
+func _overlap(string1 , string2):
+	for i in range(0, string1.length()):
+		var letter = string1[i]
+		if _is_member(string2, letter ):
+			return true
+	return false
 
 func _submit_word():
 	# create array with size of letter slots
@@ -109,4 +182,7 @@ func _submit_word():
 	for card in cards:
 		word += card.card_data.name
 		
+	var valid = _validity(word)
+	print(_word_resolution(cards,word))
 	print("submitted word: " + word)
+	print("submitted word is " + ("valid" if valid else "not valid"))
