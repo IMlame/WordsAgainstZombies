@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enter_button_invalid.png-f9b6bbfe89fed611c1969b1efe91b938.stex"
+path="res://.import/enter_button_invalid.png-051293c5cba687b8ca7e48a899c4cdee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Battle/enter_button_invalid.png"
-dest_files=[ "res://.import/enter_button_invalid.png-f9b6bbfe89fed611c1969b1efe91b938.stex" ]
+source_file="res://assets/battle/enter_button_invalid.png"
+dest_files=[ "res://.import/enter_button_invalid.png-051293c5cba687b8ca7e48a899c4cdee.stex" ]
 
 [params]
 
