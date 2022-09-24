@@ -29,6 +29,7 @@ func set_card_data(card_data: CardData):
 	update_panel()
 		
 func update_panel():
+	$PopupPanel.set_position(get_position() + Vector2(get_size().x,0))
 	$PopupPanel/Label.set_size(Vector2($PopupPanel.get_size().x - 10,$PopupPanel/Label.get_line_count() * $PopupPanel/Label.get_line_height() + 20))
 	$PopupPanel.set_size($PopupPanel/Label.get_size() + Vector2(10,20))
 
