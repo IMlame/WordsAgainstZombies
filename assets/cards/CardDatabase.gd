@@ -49,7 +49,7 @@ const DATA = {
 	"X" : 
 		[6, 0, 0, "", []],
 	"Y" : 
-		[2, 1, 2, "+100 Damage if not at the end of the word", []],
+		[2, 1, 2, "+100% Damage if not at the end of the word", []],
 	"Z" : 
 		[3, 1, 4, "", []],
 	"Wild" :
