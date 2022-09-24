@@ -95,6 +95,22 @@ func _validity(string: String):
 		return true
 	return false
 
+func _ability_resolution(cards):
+	var dmg=0
+	var draw=0
+	var words=0
+	var effects=[]
+	for card in cards:
+		dmg+=card.card_data.damage
+		draw+=card.card_data.draw_count
+		words+=card.card_data.word_count
+		effects.append(card.card_data.effects)
+	print(dmg)
+	print(effects)
+	return
+
+
+
 func _submit_word():
 	# create array with size of letter slots
 	var temp_arr = []
@@ -115,5 +131,8 @@ func _submit_word():
 	var word = ""
 	for card in cards:
 		word += card.card_data.name
-		
+	var valid = _validity(word)
+	_ability_resolution(cards)
 	print("submitted word: " + word)
+	print("submitted word is " + ("valid" if valid else "not valid"))
+	
