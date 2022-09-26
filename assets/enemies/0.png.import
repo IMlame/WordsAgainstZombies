@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/matthew_60x60.png-6147b03d36b0b71e65e3e085486b7174.stex"
+path="res://.import/0.png-6accda0c0e150376e025acdd0383782f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/character_art/matthew_60x60.png"
-dest_files=[ "res://.import/matthew_60x60.png-6147b03d36b0b71e65e3e085486b7174.stex" ]
+source_file="res://assets/enemies/0.png"
+dest_files=[ "res://.import/0.png-6accda0c0e150376e025acdd0383782f.stex" ]
 
 [params]
 

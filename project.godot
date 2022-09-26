@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "CardData",
 "language": "GDScript",
 "path": "res://src/global/CardData.gd"
+}, {
+"base": "Reference",
+"class": "EffectEnum",
+"language": "GDScript",
+"path": "res://src/battle/player_enemy/EffectEnum.gd"
+}, {
+"base": "Reference",
+"class": "EnemyEnum",
+"language": "GDScript",
+"path": "res://src/battle/player_enemy/EnemyEnum.gd"
 } ]
 _global_script_class_icons={
-"CardData": ""
+"CardData": "",
+"EffectEnum": "",
+"EnemyEnum": ""
 }
 
 [application]

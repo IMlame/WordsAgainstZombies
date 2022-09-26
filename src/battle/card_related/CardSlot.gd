@@ -20,6 +20,7 @@ func _ready():
 	outline.texture = OUTLINE_TEXTURE
 	outline.position += outline.get_rect().size/2
 	outline.z_index = -1
+	print(rect_size)
 	add_child(outline)
 
 func _process(delta):
