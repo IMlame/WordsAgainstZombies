@@ -8,7 +8,7 @@ var active_effects = []
 
 
 func _ready():
-	texture = load("res://assets/Characters/character_art/" + Saver.character_class + "_60x60.png")
+	texture = load("res://assets/characters/character_art/" + Saver.character_class + "_60x60.png")
 	scale = Vector2(IMAGE_WIDTH/get_rect().size.x, IMAGE_WIDTH/get_rect().size.x)
 	$Healthbar.max_value = Saver.max_health
 	$Healthbar.value = Saver.cur_health
