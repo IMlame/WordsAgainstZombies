@@ -5,6 +5,9 @@ const CARDSIZE = Vector2(125,175)
 const BATTLECARD = preload("res://src/battle/BattleCard.tscn")
 const DECK = preload("res://src/cards/Deck.gd")
 
+const ENEMY_TYPES = EnemyEnum.ENEMY_TYPES
+const EFFECT_TYPES = EffectEnum.EFFECT_TYPES
+
 var card_selected = []
 onready var deck_size = DECK.DECKLIST.size()
 
@@ -24,6 +27,8 @@ func _ready():
 		# center enter button
 		$SubmitWord.rect_position = last_slot.rect_position + Vector2(last_slot.rect_size.x, 
 		last_slot.rect_size.y * last_slot.rect_scale.y/2 - $SubmitWord.rect_size.y/2)
+		
+		$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {})
 		
 func draw_card():
 	# set up an angle of a card
@@ -81,6 +86,7 @@ func _on_DeckDraw_drawcard():
 # callback method from BattleCard
 func _on_hand_count_change(num_diff: int):
 	number_cards_hand += num_diff 
+	
 func _redraw_hand():
 	# scuffed code to make calculations work
 	number_cards_hand -= 1
@@ -109,19 +115,19 @@ func _word_resolution(cards,text):
 		var draw=card.draw_count
 		var word=card.word_count
 		var modifier = 0
-		"""if card.effects == 'Burn':
-			#apply burn
+		if card.effects == 'Burn':
+			word_data["persistentEffects"].append(EFFECT_TYPES.BURN)
 		if card.effects == 'Freeze':
-			#apply freeze
+			word_data["persistentEffects"].append(EFFECT_TYPES.FREEZE)
 		if card.effects == 'Gold':
-			#apply gold
+			Saver.gold += 1 # arbitrary gold increase
 		if card.effects == 'Heal':
-			#apply heal
+			$Player.damage(-5) # arbitrary heal amount
 		if card.effects == 'Paralyze':
-			#apply paralyze
+			word_data["persistentEffects"].append(EFFECT_TYPES.PARALYZE)
 		if card.effects == 'Weaken':
-			#apply weaken
-		if card.effects == 'End Turn':
+			word_data["persistentEffects"].append(EFFECT_TYPES.WEAKEN)
+		"""if card.effects == 'End Turn':
 			#apply end turn"""
 		if card.effects == '+1 Word if not used in the first slot' and i!=0:
 			word += 1
@@ -183,6 +189,25 @@ func _submit_word():
 		word += card.card_data.name
 		
 	var valid = _validity(word)
-	print(_word_resolution(cards,word))
-	print("submitted word: " + word)
-	print("submitted word is " + ("valid" if valid else "not valid"))
+	if true: # idk what happened to dictionary.txt
+		var word_data = _word_resolution(cards,word)
+		$Player.attack($Enemy, word_data["dmg"], word_data["persistentEffects"])
+		print("submitted word: " + word)
+		print(word_data)
+		print("submitted word is " + ("valid" if valid else "not valid"))
+	
+	$Enemy.attack($Player) # do this when player ends turn
+	
+	
+
+
+func _on_player_damaged(value):
+	print("player hp now ", value)
+	if value <= 0:
+		print("player died!") # do smthn
+
+
+func _on_enemy_damaged(value):
+	print("enemy hp now ", value)
+	if value <= 0:
+		print("enemy died!") # do smthn

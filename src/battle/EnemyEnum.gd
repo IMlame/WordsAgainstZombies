@@ -1,0 +1,3 @@
+class_name EnemyEnum
+
+enum ENEMY_TYPES {BASIC, SHIELD, BROILER, COOL, AXOLOTL, FRIDGE}
