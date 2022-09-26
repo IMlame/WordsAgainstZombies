@@ -1,3 +1,0 @@
-class_name EffectEnum
-
-enum EFFECT_TYPES {FREEZE, BURN, WEAKNESS, PARALYZE, HEAL}

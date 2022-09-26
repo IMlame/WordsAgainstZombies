@@ -2,7 +2,7 @@ extends Node2D
 
 # cards
 const CARDSIZE = Vector2(125,175)
-const BATTLECARD = preload("res://src/battle/BattleCard.tscn")
+const BATTLECARD = preload("res://src/battle/card_related/BattleCard.tscn")
 const DECK = preload("res://src/cards/Deck.gd")
 
 const ENEMY_TYPES = EnemyEnum.ENEMY_TYPES
@@ -28,7 +28,7 @@ func _ready():
 		$SubmitWord.rect_position = last_slot.rect_position + Vector2(last_slot.rect_size.x, 
 		last_slot.rect_size.y * last_slot.rect_scale.y/2 - $SubmitWord.rect_size.y/2)
 		
-		$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {})
+		$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {EFFECT_TYPES.WEAKNESS: 50, EFFECT_TYPES.BURN: 30})
 		
 func draw_card():
 	# set up an angle of a card
