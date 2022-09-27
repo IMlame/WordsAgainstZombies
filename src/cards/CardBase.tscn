@@ -73,13 +73,13 @@ margin_right = 250.0
 margin_bottom = 185.0
 
 [node name="LeftGap" type="MarginContainer" parent="Card/Bar/MidBar" groups=["control_children"]]
-margin_right = 85.0
+margin_right = 125.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 85, 115 )
 
 [node name="CardName" type="MarginContainer" parent="Card/Bar/MidBar" groups=["control_children"]]
-margin_left = 89.0
-margin_right = 89.0
+margin_left = 125.0
+margin_right = 125.0
 margin_bottom = 115.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Card/Bar/MidBar/CardName" groups=["control_children"]]
@@ -89,6 +89,7 @@ margin_bottom = 115.0
 margin_top = 1.0
 margin_bottom = 114.0
 custom_fonts/font = SubResource( 5 )
+align = 1
 
 [node name="MidBar2" type="HBoxContainer" parent="Card/Bar" groups=["control_children"]]
 margin_top = 189.0
