@@ -3,13 +3,13 @@ extends Node2D
 # cards
 const CARDSIZE = Vector2(125,175)
 const BATTLECARD = preload("res://src/battle/card_related/BattleCard.tscn")
-const DECK = preload("res://src/cards/Deck.gd")
 
 const ENEMY_TYPES = EnemyEnum.ENEMY_TYPES
 const EFFECT_TYPES = EffectEnum.EFFECT_TYPES
 
+var deck = Saver.deck
 var card_selected = []
-onready var deck_size = DECK.DECKLIST.size()
+onready var deck_size = deck.size()
 
 #Getting position to put in hand after draw
 onready var center_card_oval = get_viewport().size * Vector2(0.5, 1.33)
@@ -22,13 +22,13 @@ var card_spread = 0.15
 var oval_angle_vector = Vector2()
 
 func _ready():
-		randomize()
-		var last_slot = $LetterSlots.get_child($LetterSlots.get_child_count() - 1)
-		# center enter button
-		$SubmitWord.rect_position = last_slot.rect_position + Vector2(last_slot.rect_size.x, 
-		last_slot.rect_size.y * last_slot.rect_scale.y/2 - $SubmitWord.rect_size.y/2)
-		
-		$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {EFFECT_TYPES.WEAKNESS: 50, EFFECT_TYPES.BURN: 30})
+	randomize()
+	var last_slot = $LetterSlots.get_child($LetterSlots.get_child_count() - 1)
+	# center enter button
+	$SubmitWord.rect_position = last_slot.rect_position + Vector2(last_slot.rect_size.x, 
+	last_slot.rect_size.y * last_slot.rect_scale.y/2 - $SubmitWord.rect_size.y/2)
+	
+	$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {EFFECT_TYPES.WEAKNESS: 50, EFFECT_TYPES.BURN: 30})
 		
 func draw_card():
 	# set up an angle of a card
@@ -37,8 +37,8 @@ func draw_card():
 	var new_card = BATTLECARD.instance()
 	# four lines below are for setting up test cards
 	var card_data = CardData.new()
-	card_selected = DECK.DECKLIST[randi() % deck_size]
-	card_data.load_default(card_selected)
+	card_selected = deck[randi() % deck_size]
+	card_data.load_default(card_selected.name)
 	new_card.set_card_data(card_data)
 	
 	oval_angle_vector = Vector2(hor_rad * cos(angle), - ver_rad * sin(angle))
@@ -58,8 +58,8 @@ func draw_card():
 	
 	organize_cards() # reorients rest of cards in hand
 	
-	DECK.DECKLIST.erase(card_selected)
-	deck_size -= 1
+	deck.erase(card_selected)
+	deck_size = deck.size()
 	number_cards_hand += 1
 	return deck_size
 
@@ -78,9 +78,6 @@ func organize_cards():
 			card.default_display() # animates card to default place
 			card_numb += 1
 			card.state = 1
-
-func _on_DeckDraw_drawcard():
-	$Deck/DeckDraw.deck_size = draw_card()
 
 # adjusts variable when cards are put into/removed from slots
 # callback method from BattleCard
@@ -211,3 +208,7 @@ func _on_enemy_damaged(value):
 	print("enemy hp now ", value)
 	if value <= 0:
 		print("enemy died!") # do smthn
+
+func _on_DeckDraw_pressed():
+	if deck_size > 0:
+		draw_card()
