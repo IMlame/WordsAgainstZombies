@@ -4,7 +4,7 @@ extends Node
 # slots
 const CARDSLOT = preload("res://src/battle/card_related/CardSlot.tscn")
 const SPACING = 175
-const X_PERCENT = 55
+const X_PERCENT = 40
 const SLOT_SIZE = Vector2(150, 210)
 var selected_slot = -1
 
