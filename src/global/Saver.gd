@@ -17,24 +17,19 @@ var stage = 0
 var base_damage = 0
 var starting_hand_count = 0
 var letter_count = 4
-var letter_info = {}
+var deck = []
 
 func _ready():
 	# test card to be saved
-	var card = CardDataClass.new("a", 1, 2, 3, [])
-	letter_info[card.name] = card
+	var default_deck = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+	for letter in default_deck:
+		var card_data = CardData.new()
+		card_data.load_default(letter)
+		deck.append(card_data)
 
 func save_data():
 	# saves data to last loaded save
 	if chosen_save != -1:
-		var json_letter_info = {}
-		# convert letter info to json array
-		for key in letter_info:
-			json_letter_info[key] = {
-				"attributes" : letter_info[key].attributes,
-				"damage" : letter_info[key].damage,
-				"draw_count" : letter_info[key].draw_count,
-				"word_count": letter_info[key].word_count}
 		
 		# json object that weilds all game info
 		var game_data = {
@@ -48,7 +43,7 @@ func save_data():
 			"base_damage" : base_damage,
 			"starting_hand_count" : starting_hand_count,
 			"letter_count" : letter_count,
-			"letter_info" : json_letter_info
+			"deck" : deck
 		}
 		
 		# creates directories if directories don't exist
@@ -90,10 +85,7 @@ func load_data(save_num: int):
 				base_damage = game_data.get("base_damage")
 				starting_hand_count = game_data.get("starting_hand_count")
 				letter_count = game_data.get("letter_count")
+				deck = game_data.get("deck")
 				
-				# extract data from letter info
-				for key in game_data.get("letter_info").keys():
-					var letter = game_data.get("letter_info").get(key)
-					letter_info[key] = CardDataClass.new(key, letter.get("damage"), letter.get("draw_count"), letter.get("word_count"), letter.get("attributes"))
 				return true
 	return false

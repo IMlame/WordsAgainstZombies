@@ -1,98 +1,94 @@
 extends Node2D
 
 # cards
-const CARDSIZE = Vector2(125,175)
 const BATTLECARD = preload("res://src/battle/card_related/BattleCard.tscn")
-const DECK = preload("res://src/cards/Deck.gd")
 
 const ENEMY_TYPES = EnemyEnum.ENEMY_TYPES
 const EFFECT_TYPES = EffectEnum.EFFECT_TYPES
+const CARD_STATES = CardStateEnum.CARD_STATES
 
-var card_selected = []
-onready var deck_size = DECK.DECKLIST.size()
+var deck = []
+var hand = []
+var discard = []
+var slots = []
+var played = []
 
-#Getting position to put in hand after draw
-onready var center_card_oval = get_viewport().size * Vector2(0.5, 1.33)
-onready var hor_rad = get_viewport().size.x * 0.55
-onready var ver_rad = get_viewport().size.y * 0.4
-var angle = 0
-var card_numb = 0
-var number_cards_hand = 0
-var card_spread = 0.15
-var oval_angle_vector = Vector2()
+var words_left = 1
 
 func _ready():
-		randomize()
-		var last_slot = $LetterSlots.get_child($LetterSlots.get_child_count() - 1)
-		# center enter button
-		$SubmitWord.rect_position = last_slot.rect_position + Vector2(last_slot.rect_size.x, 
-		last_slot.rect_size.y * last_slot.rect_scale.y/2 - $SubmitWord.rect_size.y/2)
+	randomize()
+	var last_slot = $LetterSlots.get_child($LetterSlots.get_child_count() - 1)
+	# center enter button
+	$SubmitWord.rect_position = last_slot.rect_position + Vector2(last_slot.rect_size.x, 
+	last_slot.rect_size.y * last_slot.rect_scale.y/2 - $SubmitWord.rect_size.y/2)
+	
+	$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {EFFECT_TYPES.WEAKNESS: 50, EFFECT_TYPES.BURN: 30})
+	
+	# fill deck with cards
+	for card in Saver.deck:
+		var new_card = BATTLECARD.instance()
+		# four lines below are for setting up test cards
+		var card_data = CardData.new()
+		card_data.load_default(card.name)
+		new_card.set_card_data(card_data)
+		new_card.set_locations($Deck, $Discard)
+		new_card.connect("slot_changed", self, "_update_slot_and_hand")
+		$Cards.add_child(new_card)
+		deck.append(new_card)
+	
+	for card in deck:
+		hand.append(card)
+	deck.clear()
+	update_cards()
+
+func update_cards(): # moves cards into right place
+	for i in range(deck.size()):
+		deck[i].update_card(deck, hand, discard, slots, played, 0, i)
+	
+	for i in range(hand.size()):
+		hand[i].update_card(deck, hand, discard, slots, played, 1, i)
 		
-		$Enemy.setup_enemy(ENEMY_TYPES.BASIC, 100, 10, {EFFECT_TYPES.WEAKNESS: 50, EFFECT_TYPES.BURN: 30})
+	for i in range(discard.size()):
+		discard[i].update_card(deck, hand, discard, slots, played, 2, i)
+	
+	for i in range(slots.size()):
+		slots[i].update_card(deck, hand, discard, slots, played, 3, i)
+
+	for i in range(played.size()):
+		played[i].update_card(deck, hand, discard, slots, played, 4, i)
+
+func end_turn():
+	$Enemy.attack($Player) # do this when player ends turn
+
+func _update_slot_and_hand(to_slots, to_hand):
+	# move replaced card to hand
+	if to_hand != null:
+		hand.erase(to_hand)
+		hand.append(to_hand)
+		slots.erase(to_hand)
+	
+	# move placed card to slots
+	if to_slots != null:
+		slots.erase(to_slots)
+		slots.append(to_slots)
+		hand.erase(to_slots)
+	
+	for i in range(0, slots.size()): # resort slots, insertion sort
+		var smallest = slots[i].in_slot
+		var index = i
+		for j in range(i + 1, slots.size()):
+			if slots[j].in_slot < smallest:
+				smallest = slots[j].in_slot
+				index = j
+		var temp = slots[i]
+		slots[i] = slots[index]
+		slots[index] = temp
+	
+	for card in hand:	# reoreint cards
+		$Cards.move_child(card, 0)
 		
-func draw_card():
-	# set up an angle of a card
-	angle = PI/2 + card_spread*(float(number_cards_hand)/2 - number_cards_hand)
-	# initialize a a drawn card
-	var new_card = BATTLECARD.instance()
-	# four lines below are for setting up test cards
-	var card_data = CardData.new()
-	card_selected = DECK.DECKLIST[randi() % deck_size]
-	card_data.load_default(card_selected)
-	new_card.set_card_data(card_data)
-	
-	oval_angle_vector = Vector2(hor_rad * cos(angle), - ver_rad * sin(angle))
-	
-	new_card.rect_position = $Deck.position - CARDSIZE/2 # set starting position
-	
-	new_card.set_default_display(
-		center_card_oval + oval_angle_vector - CARDSIZE, # default pos
-		(90 - rad2deg(angle))/4, # default rot
-		Vector2(1, 1) # default scale
-	)
-	new_card.connect("on_slot_filled", self, "_on_hand_count_change")
-	new_card.connect("redraw_hand", self, "_redraw_hand")
-	$Cards.add_child(new_card)
-	new_card.default_display() # does card animation from deck to hand
-	new_card.focus_detect = true # hovering enlarges card
-	
-	organize_cards() # reorients rest of cards in hand
-	
-	DECK.DECKLIST.erase(card_selected)
-	deck_size -= 1
-	number_cards_hand += 1
-	return deck_size
+	update_cards()
 
-func organize_cards():
-	card_numb = 0
-	for card in $Cards.get_children(): # reorganise hand
-		# ignore card if in slot
-		if card.in_slot == -1:
-			angle = PI/2 + card_spread*(float(number_cards_hand)/2 - card_numb)
-			oval_angle_vector = Vector2(hor_rad * cos(angle), - ver_rad * sin(angle))
-			card.set_default_display(
-				center_card_oval + oval_angle_vector - CARDSIZE, # default pos
-				(90 - rad2deg(angle))/4, # default rot
-				Vector2(1, 1)# default scale
-			)
-			card.default_display() # animates card to default place
-			card_numb += 1
-			card.state = 1
-
-func _on_DeckDraw_drawcard():
-	$Deck/DeckDraw.deck_size = draw_card()
-
-# adjusts variable when cards are put into/removed from slots
-# callback method from BattleCard
-func _on_hand_count_change(num_diff: int):
-	number_cards_hand += num_diff 
-	
-func _redraw_hand():
-	# scuffed code to make calculations work
-	number_cards_hand -= 1
-	organize_cards()
-	number_cards_hand += 1
-	
 func _validity(string: String):
 	var dic = File.new()
 	dic.open("res://assets/temp_peter/dictionary.txt", File.READ)
@@ -168,39 +164,18 @@ func _overlap(string1 , string2):
 	return false
 
 func _submit_word():
-	# create array with size of letter slots
-	var temp_arr = []
-	for i in range(Saver.letter_count):
-		temp_arr.append(null)
-		
-	# find all cards in slots, place them in respective index
-	for card in $Cards.get_children():
-		if card.in_slot != -1:
-			temp_arr[card.in_slot] = card
-
-	# exclude unfilled slots
-	var cards = []
-	for card in temp_arr:
-		if card != null:
-			cards.append(card)
-	
 	var word = ""
-	for card in cards:
+	for card in slots:
 		word += card.card_data.name
 		
 	var valid = _validity(word)
 	if true: # idk what happened to dictionary.txt
-		var word_data = _word_resolution(cards,word)
+		var word_data = _word_resolution(slots,word)
 		$Player.attack($Enemy, word_data["dmg"], word_data["persistentEffects"])
 		print("submitted word: " + word)
 		print(word_data)
 		print("submitted word is " + ("valid" if valid else "not valid"))
 	
-	$Enemy.attack($Player) # do this when player ends turn
-	
-	
-
-
 func _on_player_damaged(value):
 	print("player hp now ", value)
 	if value <= 0:
