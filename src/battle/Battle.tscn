@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/effect_icons/3.png" type="Texture" id=13]
 [ext_resource path="res://assets/effect_icons/1.png" type="Texture" id=14]
 [ext_resource path="res://assets/effect_icons/2.png" type="Texture" id=15]
-[ext_resource path="res://assets/battle/bottom_bar.png" type="Texture" id=16]
+[ext_resource path="res://assets/battle/topbar.png" type="Texture" id=16]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.356863, 0.894118, 0, 1 )
@@ -32,13 +32,13 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="Deck" type="Sprite" parent="."]
-position = Vector2( 1756, 535 )
+position = Vector2( 1756, 638 )
 scale = Vector2( 0.6, 0.6 )
 z_index = 1
 texture = ExtResource( 1 )
 
 [node name="Discard" type="Sprite" parent="."]
-position = Vector2( 216, 540 )
+position = Vector2( 216, 643 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
@@ -49,14 +49,14 @@ script = ExtResource( 3 )
 
 [node name="SubmitWord" type="TextureButton" parent="."]
 margin_left = 1512.0
-margin_top = 513.0
+margin_top = 616.0
 margin_right = 1612.0
-margin_bottom = 563.0
+margin_bottom = 666.0
 texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 7 )
 
 [node name="Player" type="Sprite" parent="."]
-position = Vector2( 472, 130 )
+position = Vector2( 472, 221 )
 texture = ExtResource( 8 )
 centered = false
 script = ExtResource( 10 )
@@ -72,22 +72,22 @@ percent_visible = false
 [node name="Indicators" type="Node" parent="Player"]
 
 [node name="0" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 423, 90 )
+position = Vector2( 423, 181 )
 
 [node name="1" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 464, 89 )
+position = Vector2( 464, 180 )
 texture = ExtResource( 14 )
 
 [node name="2" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 506, 92 )
+position = Vector2( 506, 181 )
 texture = ExtResource( 15 )
 
 [node name="3" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 552, 89 )
+position = Vector2( 552, 180 )
 texture = ExtResource( 13 )
 
 [node name="Enemy" type="Sprite" parent="."]
-position = Vector2( 1279, 145 )
+position = Vector2( 1279, 236 )
 texture = ExtResource( 11 )
 centered = false
 script = ExtResource( 9 )
@@ -103,23 +103,23 @@ percent_visible = false
 [node name="Indicators" type="Node" parent="Enemy"]
 
 [node name="0" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1230, 105 )
+position = Vector2( 1230, 196 )
 
 [node name="1" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1271, 104 )
+position = Vector2( 1271, 195 )
 texture = ExtResource( 14 )
 
 [node name="2" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1313, 107 )
+position = Vector2( 1313, 194 )
 texture = ExtResource( 15 )
 
 [node name="3" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1359, 104 )
+position = Vector2( 1359, 195 )
 texture = ExtResource( 13 )
 
-[node name="BottomBar" type="Sprite" parent="."]
-position = Vector2( 990, 1032 )
-scale = Vector2( 2, 2 )
+[node name="Topbar" type="Sprite" parent="."]
+position = Vector2( 972, 66 )
+scale = Vector2( 2.5, 2.5 )
 z_index = 1
 texture = ExtResource( 16 )
 

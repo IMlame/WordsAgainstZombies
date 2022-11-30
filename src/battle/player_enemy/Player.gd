@@ -33,7 +33,8 @@ func apply_effect(effect: int):
 	_update_indicators()
 
 func damage(damage_amount: int):
-	$Healthbar.value -= damage_amount
+	$Healthbar.value = max(Saver.cur_health - damage_amount, 0)
+	Saver.cur_health = max(Saver.cur_health - damage_amount, 0)
 
 func attack(enemy: Sprite, dmg: int, effects: Array):
 	var attack = true
