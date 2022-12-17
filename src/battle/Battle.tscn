@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/cards/card.png" type="Texture" id=1]
 [ext_resource path="res://assets/background/background1.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/effect_icons/1.png" type="Texture" id=14]
 [ext_resource path="res://assets/effect_icons/2.png" type="Texture" id=15]
 [ext_resource path="res://assets/battle/topbar.png" type="Texture" id=16]
+[ext_resource path="res://assets/battle/coin.png" type="Texture" id=17]
+[ext_resource path="res://src/battle/CoinNum.gd" type="Script" id=18]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.356863, 0.894118, 0, 1 )
@@ -122,6 +124,77 @@ position = Vector2( 972, 66 )
 scale = Vector2( 2.5, 2.5 )
 z_index = 1
 texture = ExtResource( 16 )
+
+[node name="WordNum" type="Label" parent="Topbar"]
+margin_left = -103.6
+margin_top = -7.99999
+margin_right = -86.6
+margin_bottom = 6.00001
+text = "0"
+
+[node name="WordLabel" type="Label" parent="Topbar/WordNum"]
+margin_left = -53.2
+margin_right = -7.19997
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( -181.6, 41.6 )
+text = "WORD:"
+
+[node name="DamageNum" type="Label" parent="Topbar"]
+margin_left = -192.0
+margin_top = -8.0
+margin_right = -175.0
+margin_bottom = 6.0
+text = "0"
+
+[node name="DamageLabel" type="Label" parent="Topbar/DamageNum"]
+margin_left = -40.8
+margin_right = -0.800003
+margin_bottom = 14.0
+text = "DMG:"
+
+[node name="CoinNum" type="Label" parent="Topbar"]
+margin_left = 182.8
+margin_top = -10.4
+margin_right = 222.8
+margin_bottom = 3.6
+text = "0"
+script = ExtResource( 18 )
+
+[node name="CoinIcon" type="Sprite" parent="Topbar/CoinNum"]
+position = Vector2( -20, 9.60001 )
+scale = Vector2( 0.0556, 0.0556 )
+texture = ExtResource( 17 )
+
+[node name="DrawNum" type="Label" parent="Topbar"]
+margin_left = -13.5993
+margin_top = -7.99999
+margin_right = 3.40067
+margin_bottom = 6.00001
+text = "0"
+
+[node name="DrawLabel" type="Label" parent="Topbar/DrawNum"]
+margin_left = -52.0
+margin_top = -0.400002
+margin_right = -5.99997
+margin_bottom = 13.6
+rect_pivot_offset = Vector2( -181.6, 41.6 )
+text = "DRAW:"
+
+[node name="Effects" type="Label" parent="Topbar"]
+margin_left = 80.0001
+margin_top = -7.59999
+margin_right = 97.0001
+margin_bottom = 6.40001
+text = "[]"
+
+[node name="EffectLabel" type="Label" parent="Topbar/Effects"]
+margin_left = -52.0
+margin_top = -0.400002
+margin_right = -5.0
+margin_bottom = 30.6
+rect_pivot_offset = Vector2( -181.6, 41.6 )
+text = "EFFECT:
+"
 
 [connection signal="button_down" from="SubmitWord" to="." method="_submit_word"]
 [connection signal="value_changed" from="Player/Healthbar" to="." method="_on_player_damaged"]

@@ -41,9 +41,9 @@ func _ready():
 	for i in range(Saver.starting_hand_count):
 		hand.append(deck.pop_front())
 	
-	update_cards()
+	update_cards_and_header()
 
-func update_cards(): # moves cards into right place
+func update_cards_and_header(): # moves cards into right place
 	for i in range(deck.size()):
 		deck[i].update_card(deck, hand, discard, slots, played, 0, i)
 	
@@ -58,7 +58,22 @@ func update_cards(): # moves cards into right place
 
 	for i in range(played.size()):
 		played[i].update_card(deck, hand, discard, slots, played, 4, i)
+		
+	_update_header()
+		
+func _update_header():
+	var word = ""
+	for card in slots:
+		word += card.card_data.name
+	
+	var word_data = _word_resolution(slots,word)
+	
+	$Topbar/DamageNum.text = str(word_data["dmg"])
+	$Topbar/WordNum.text = str(word_data["word"])
+	$Topbar/DrawNum.text = str(word_data["draw"])
+	$Topbar/Effects.text = str(word_data["persistentEffects"])
 
+# callback function from battlecard (when replacing cards with a new one)
 func _update_slot_and_hand(to_slots, to_hand):
 	# move replaced card to hand
 	if to_hand != null:
@@ -83,10 +98,10 @@ func _update_slot_and_hand(to_slots, to_hand):
 		slots[i] = slots[index]
 		slots[index] = temp
 	
-	for card in hand:	# reoreint cards
+	for card in hand:	# reorient cards
 		$Cards.move_child(card, 0)
 		
-	update_cards()
+	update_cards_and_header()
 
 func _validity(string: String):
 	var dic = File.new()
@@ -115,15 +130,15 @@ func _word_resolution(cards,text):
 		if card.effects == 'Freeze':
 			word_data["persistentEffects"].append(EFFECT_TYPES.FREEZE)
 		if card.effects == 'Gold':
-			Saver.gold += 1 # arbitrary gold increase
+			$Topbar/CoinNum.add_coins(5) # arbitrary gold increase
 		if card.effects == 'Heal':
 			$Player.damage(-5) # arbitrary heal amount
 		if card.effects == 'Paralyze':
 			word_data["persistentEffects"].append(EFFECT_TYPES.PARALYZE)
 		if card.effects == 'Weaken':
 			word_data["persistentEffects"].append(EFFECT_TYPES.WEAKEN)
-		"""if card.effects == 'End Turn':
-			#apply end turn"""
+		if card.effects == 'End Turn':
+			word -= 999
 		if card.effects == '+1 Word if not used in the first slot' and i!=0:
 			word += 1
 		if card.effects == '+200% Damage, -50% Damage to self':
@@ -185,7 +200,7 @@ func _submit_word():
 		# draw cards
 		_draw_cards(word_data["draw"])
 
-		update_cards()
+		update_cards_and_header()
 		
 		print("submitted word: " + word)
 		print(word_data)
@@ -215,7 +230,7 @@ func _end_turn():
 	played.clear()
 	$Enemy.attack($Player) # do this when player ends turn
 	_draw_cards(Saver.starting_hand_count)
-	update_cards()
+	update_cards_and_header()
 	
 func _on_player_damaged(value):
 	print("player hp now ", value)
