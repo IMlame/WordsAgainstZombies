@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/cards/card.png" type="Texture" id=1]
 [ext_resource path="res://assets/background/background1.png" type="Texture" id=2]
@@ -17,7 +17,12 @@
 [ext_resource path="res://assets/effect_icons/2.png" type="Texture" id=15]
 [ext_resource path="res://assets/battle/topbar.png" type="Texture" id=16]
 [ext_resource path="res://assets/battle/coin.png" type="Texture" id=17]
-[ext_resource path="res://src/battle/CoinNum.gd" type="Script" id=18]
+[ext_resource path="res://src/battle/GoldNum.gd" type="Script" id=18]
+[ext_resource path="res://comici.ttf" type="DynamicFontData" id=19]
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 19 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.356863, 0.894118, 0, 1 )
@@ -57,6 +62,15 @@ margin_bottom = 666.0
 texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 7 )
 
+[node name="WordsLeft" type="Label" parent="SubmitWord"]
+margin_left = 73.0
+margin_top = 5.0
+margin_right = 113.0
+margin_bottom = 39.0
+custom_colors/font_color = Color( 0.0313726, 0.878431, 0.0392157, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "1"
+
 [node name="Player" type="Sprite" parent="."]
 position = Vector2( 472, 221 )
 texture = ExtResource( 8 )
@@ -69,7 +83,6 @@ margin_top = 123.0
 margin_right = 117.0
 margin_bottom = 153.0
 custom_styles/fg = SubResource( 1 )
-percent_visible = false
 
 [node name="Indicators" type="Node" parent="Player"]
 
@@ -89,6 +102,7 @@ position = Vector2( 552, 180 )
 texture = ExtResource( 13 )
 
 [node name="Enemy" type="Sprite" parent="."]
+modulate = Color( 0.835294, 0.835294, 0.835294, 1 )
 position = Vector2( 1279, 236 )
 texture = ExtResource( 11 )
 centered = false
@@ -100,7 +114,6 @@ margin_top = 71.0
 margin_right = 120.0
 margin_bottom = 101.0
 custom_styles/fg = SubResource( 2 )
-percent_visible = false
 
 [node name="Indicators" type="Node" parent="Enemy"]
 
@@ -126,9 +139,9 @@ z_index = 1
 texture = ExtResource( 16 )
 
 [node name="WordNum" type="Label" parent="Topbar"]
-margin_left = -103.6
+margin_left = -109.6
 margin_top = -7.99999
-margin_right = -86.6
+margin_right = -92.6001
 margin_bottom = 6.00001
 text = "0"
 
@@ -152,7 +165,7 @@ margin_right = -0.800003
 margin_bottom = 14.0
 text = "DMG:"
 
-[node name="CoinNum" type="Label" parent="Topbar"]
+[node name="GoldNum" type="Label" parent="Topbar"]
 margin_left = 182.8
 margin_top = -10.4
 margin_right = 222.8
@@ -160,15 +173,15 @@ margin_bottom = 3.6
 text = "0"
 script = ExtResource( 18 )
 
-[node name="CoinIcon" type="Sprite" parent="Topbar/CoinNum"]
+[node name="GoldIcon" type="Sprite" parent="Topbar/GoldNum"]
 position = Vector2( -20, 9.60001 )
 scale = Vector2( 0.0556, 0.0556 )
 texture = ExtResource( 17 )
 
 [node name="DrawNum" type="Label" parent="Topbar"]
-margin_left = -13.5993
+margin_left = -34.3994
 margin_top = -7.99999
-margin_right = 3.40067
+margin_right = -17.3994
 margin_bottom = 6.00001
 text = "0"
 
@@ -181,11 +194,11 @@ rect_pivot_offset = Vector2( -181.6, 41.6 )
 text = "DRAW:"
 
 [node name="Effects" type="Label" parent="Topbar"]
-margin_left = 80.0001
+margin_left = 44.4
 margin_top = -7.59999
-margin_right = 97.0001
+margin_right = 61.4
 margin_bottom = 6.40001
-text = "[]"
+text = "{}"
 
 [node name="EffectLabel" type="Label" parent="Topbar/Effects"]
 margin_left = -52.0

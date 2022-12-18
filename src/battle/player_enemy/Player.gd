@@ -6,6 +6,12 @@ const IMAGE_WIDTH = 150
 # effects on enemy applied by enemy
 var active_effects = []
 
+# flash red animation
+var t = 0
+var animate_time = 0.3
+var red = 1
+var green = 1
+var blue = 1
 
 func _ready():
 	texture = load("res://assets/characters/character_art/" + Saver.character_class + "_60x60.png")
@@ -35,6 +41,19 @@ func apply_effect(effect: int):
 func damage(damage_amount: int):
 	$Healthbar.value = max(Saver.cur_health - damage_amount, 0)
 	Saver.cur_health = max(Saver.cur_health - damage_amount, 0)
+	red = 1
+	green = 0
+	blue = 0
+	t = 0.01
+
+func heal(heal_amount: int):
+	if heal_amount != 0:
+		$Healthbar.value = max(Saver.cur_health + heal_amount, 0)
+		Saver.cur_health = max(Saver.cur_health + heal_amount, 0)
+		red = 0
+		green = 1
+		blue = 0
+		t = 0.01
 
 func attack(enemy: Sprite, dmg: int, effects: Array):
 	var attack = true
@@ -72,3 +91,11 @@ func _update_indicators():
 		else:
 			indicator.modulate = Color(0, 0, 0, 1)
 
+func _physics_process(delta):
+	if t != 0 and t < 1:
+		modulate = Color((1 - t) * red, (1 - t) * green, (1 - t) * blue, 1)
+		t += delta/float(animate_time)
+	else:
+		modulate = Color(1, 1, 1, 1)
+		t = 0
+		

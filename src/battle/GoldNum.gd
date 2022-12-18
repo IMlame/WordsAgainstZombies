@@ -11,5 +11,5 @@ func _ready():
 	pass # Replace with function body.
 
 
-func add_coins(add_amount: int):
+func add_gold(add_amount: int):
 	text = str(int(text) + add_amount)
