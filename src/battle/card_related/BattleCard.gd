@@ -8,7 +8,7 @@ const CARD_IMG = preload("res://assets/cards/card.png")
 const CARD_BACK_IMG = preload("res://assets/cards/card_back.png")
 
 # hand preset values
-onready var center_card_oval = get_viewport().size * Vector2(0.5, 1.2)
+onready var center_card_oval = get_viewport().size * Vector2(0.5, 1.33)
 onready var hor_rad = get_viewport().size.x * 0.55
 onready var ver_rad = get_viewport().size.y * 0.4
 const CARD_SPREAD = 0.15
@@ -22,7 +22,7 @@ const DISCARD_TIME = 0.2
 const PLAY_TIME = 1
 const ZOOM_TIME = 0.05
 
-const ZOOM_SIZE = 1.5
+const ZOOM_SIZE = 1.3
 
 # signals
 signal slot_changed(added, removed)
@@ -124,7 +124,7 @@ func _on_Focus_mouse_entered():
 
 func _on_Focus_mouse_exited():
 	if in_slot == -1 and (card_state == CARD_STATES.HAND):
-		move(ZOOM_TIME, in_hand_pos, in_hand_angle, Vector2(1, 1))
+		move(ZOOM_TIME, in_hand_pos, in_hand_angle, Vector2(.8, .8))
 		$CardBase/Card.z_index = 0
 
 
@@ -180,7 +180,7 @@ func update_card(deck: Array, hand: Array, discard: Array, slot: Array, played: 
 		in_hand_pos = center_card_oval + oval_angle_vector - Vector2(125,175)
 		in_hand_angle = (90 - rad2deg(angle))/4
 		
-		move(DRAW_TIME, in_hand_pos, in_hand_angle, Vector2(1, 1))
+		move(DRAW_TIME, in_hand_pos, in_hand_angle, Vector2(.8, .8))
 		card_state = CARD_STATES.HAND
 		
 	elif type == CARD_STATES.DISCARD and card_state != CARD_STATES.DISCARD:
