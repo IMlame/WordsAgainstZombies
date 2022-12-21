@@ -33,5 +33,6 @@ margin_bottom = 1012.0
 
 [connection signal="pressed" from="SaveScreenButton1" to="." method="_on_Save_Button_Pushed" binds= [ 0 ]]
 [connection signal="pressed" from="SaveScreenButton2" to="." method="_on_Save_Button_Pushed" binds= [ 1 ]]
-[connection signal="pressed" from="SaveScreenButton3" to="." method="_on_Save_Button_Pushed" binds= [ 2 ]]
-[connection signal="pressed" from="SaveScreenButton4" to="SaveScreenButton4" method="_on_Save_Button_Pushed" binds= [ 3 ]]
+[connection signal="pressed" from="SaveScreenButton2" to="SaveScreenButton2" method="_on_SaveScreenButton2_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="SaveScreenButton3" to="SaveScreenButton4" method="_on_Save_Button_Pushed" binds= [ 2 ]]
+[connection signal="pressed" from="SaveScreenButton4" to="." method="_on_Save_Button_Pushed"]

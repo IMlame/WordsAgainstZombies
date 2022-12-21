@@ -18,10 +18,13 @@ func _ready():
 		cur_button.set_position(Vector2(Sizer.width()/2 - button_width/2, padding + i * (button_height + (Sizer.height() - button_height * num_buttons - padding * 2) / (num_buttons - 1))))
 		cur_button.set_button_num(i)
 		add_child(cur_button)
-
+	
 # when a save button is pushed, set load file to button number, and go to correct scene
 func _on_Save_Button_Pushed(button_num: int):
 	var save_exists = Saver.load_data(button_num)
+	Saver.save_data()
+	print(Saver.player_info.deck[0].name)
+
 	if save_exists:
 		print("go to dungeon floor")
 	else:
