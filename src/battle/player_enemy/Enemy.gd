@@ -14,6 +14,13 @@ var base_damage = 0
 # effects on enemy applied by player (index > 0 represents 1 stack of an effect)
 var active_effects = []
 
+# flash red animation
+var t = 0
+var animate_time = 0.3
+var red = 1
+var green = 1
+var blue = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng.randomize()
@@ -51,6 +58,10 @@ func apply_effect(effect: int):
 
 func damage(damage_amount: int):
 	$Healthbar.value -= damage_amount
+	red = 1
+	green = 0
+	blue = 0
+	t = 0.01
 
 func attack(player: Sprite):
 	var attack = true
@@ -89,3 +100,11 @@ func _update_indicators():
 			indicator.modulate = Color(1, 1, 1, 1)
 		else:
 			indicator.modulate = Color(0, 0, 0, 1)
+
+func _physics_process(delta):
+	if t != 0 and t < 1:
+		modulate = Color((1 - t) * red, (1 - t) * green, (1 - t) * blue, 1)
+		t += delta/float(animate_time)
+	else:
+		modulate = Color(1, 1, 1, 1)
+		t = 0

@@ -15,13 +15,13 @@ var xp = 0
 var xp_level = 0
 var stage = 0
 var base_damage = 0
-var starting_hand_count = 0
+var starting_hand_count = 8
 var letter_count = 4
 var deck = []
 
 func _ready():
 	# test card to be saved
-	var default_deck = ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+	var default_deck = ["N", "T", "L", "Y", "H", "L", "J", "E", "L","P","U","D","K","Q","E","B","G","F","I","J","A","I","O"]
 	for letter in default_deck:
 		var card_data = CardData.new()
 		card_data.load_default(letter)

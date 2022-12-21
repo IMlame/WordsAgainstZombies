@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/cards/card.png" type="Texture" id=1]
 [ext_resource path="res://assets/background/background1.png" type="Texture" id=2]
@@ -15,7 +15,14 @@
 [ext_resource path="res://assets/effect_icons/3.png" type="Texture" id=13]
 [ext_resource path="res://assets/effect_icons/1.png" type="Texture" id=14]
 [ext_resource path="res://assets/effect_icons/2.png" type="Texture" id=15]
-[ext_resource path="res://assets/battle/bottom_bar.png" type="Texture" id=16]
+[ext_resource path="res://assets/battle/topbar.png" type="Texture" id=16]
+[ext_resource path="res://assets/battle/coin.png" type="Texture" id=17]
+[ext_resource path="res://src/battle/GoldNum.gd" type="Script" id=18]
+[ext_resource path="res://comici.ttf" type="DynamicFontData" id=19]
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 19 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.356863, 0.894118, 0, 1 )
@@ -32,13 +39,13 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="Deck" type="Sprite" parent="."]
-position = Vector2( 1756, 535 )
+position = Vector2( 1756, 638 )
 scale = Vector2( 0.6, 0.6 )
 z_index = 1
 texture = ExtResource( 1 )
 
 [node name="Discard" type="Sprite" parent="."]
-position = Vector2( 216, 540 )
+position = Vector2( 216, 643 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
@@ -49,14 +56,23 @@ script = ExtResource( 3 )
 
 [node name="SubmitWord" type="TextureButton" parent="."]
 margin_left = 1512.0
-margin_top = 513.0
+margin_top = 616.0
 margin_right = 1612.0
-margin_bottom = 563.0
+margin_bottom = 666.0
 texture_normal = ExtResource( 6 )
 texture_hover = ExtResource( 7 )
 
+[node name="WordsLeft" type="Label" parent="SubmitWord"]
+margin_left = 73.0
+margin_top = 5.0
+margin_right = 113.0
+margin_bottom = 39.0
+custom_colors/font_color = Color( 0.0313726, 0.878431, 0.0392157, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "1"
+
 [node name="Player" type="Sprite" parent="."]
-position = Vector2( 472, 130 )
+position = Vector2( 472, 221 )
 texture = ExtResource( 8 )
 centered = false
 script = ExtResource( 10 )
@@ -67,27 +83,27 @@ margin_top = 123.0
 margin_right = 117.0
 margin_bottom = 153.0
 custom_styles/fg = SubResource( 1 )
-percent_visible = false
 
 [node name="Indicators" type="Node" parent="Player"]
 
 [node name="0" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 423, 90 )
+position = Vector2( 423, 181 )
 
 [node name="1" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 464, 89 )
+position = Vector2( 464, 180 )
 texture = ExtResource( 14 )
 
 [node name="2" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 506, 92 )
+position = Vector2( 506, 181 )
 texture = ExtResource( 15 )
 
 [node name="3" parent="Player/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 552, 89 )
+position = Vector2( 552, 180 )
 texture = ExtResource( 13 )
 
 [node name="Enemy" type="Sprite" parent="."]
-position = Vector2( 1279, 145 )
+modulate = Color( 0.835294, 0.835294, 0.835294, 1 )
+position = Vector2( 1279, 236 )
 texture = ExtResource( 11 )
 centered = false
 script = ExtResource( 9 )
@@ -98,30 +114,100 @@ margin_top = 71.0
 margin_right = 120.0
 margin_bottom = 101.0
 custom_styles/fg = SubResource( 2 )
-percent_visible = false
 
 [node name="Indicators" type="Node" parent="Enemy"]
 
 [node name="0" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1230, 105 )
+position = Vector2( 1230, 196 )
 
 [node name="1" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1271, 104 )
+position = Vector2( 1271, 195 )
 texture = ExtResource( 14 )
 
 [node name="2" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1313, 107 )
+position = Vector2( 1313, 194 )
 texture = ExtResource( 15 )
 
 [node name="3" parent="Enemy/Indicators" instance=ExtResource( 12 )]
-position = Vector2( 1359, 104 )
+position = Vector2( 1359, 195 )
 texture = ExtResource( 13 )
 
-[node name="BottomBar" type="Sprite" parent="."]
-position = Vector2( 990, 1032 )
-scale = Vector2( 2, 2 )
+[node name="Topbar" type="Sprite" parent="."]
+position = Vector2( 972, 66 )
+scale = Vector2( 2.5, 2.5 )
 z_index = 1
 texture = ExtResource( 16 )
+
+[node name="WordNum" type="Label" parent="Topbar"]
+margin_left = -109.6
+margin_top = -7.99999
+margin_right = -92.6001
+margin_bottom = 6.00001
+text = "0"
+
+[node name="WordLabel" type="Label" parent="Topbar/WordNum"]
+margin_left = -53.2
+margin_right = -7.19997
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( -181.6, 41.6 )
+text = "WORD:"
+
+[node name="DamageNum" type="Label" parent="Topbar"]
+margin_left = -192.0
+margin_top = -8.0
+margin_right = -175.0
+margin_bottom = 6.0
+text = "0"
+
+[node name="DamageLabel" type="Label" parent="Topbar/DamageNum"]
+margin_left = -40.8
+margin_right = -0.800003
+margin_bottom = 14.0
+text = "DMG:"
+
+[node name="GoldNum" type="Label" parent="Topbar"]
+margin_left = 182.8
+margin_top = -10.4
+margin_right = 222.8
+margin_bottom = 3.6
+text = "0"
+script = ExtResource( 18 )
+
+[node name="GoldIcon" type="Sprite" parent="Topbar/GoldNum"]
+position = Vector2( -20, 9.60001 )
+scale = Vector2( 0.0556, 0.0556 )
+texture = ExtResource( 17 )
+
+[node name="DrawNum" type="Label" parent="Topbar"]
+margin_left = -34.3994
+margin_top = -7.99999
+margin_right = -17.3994
+margin_bottom = 6.00001
+text = "0"
+
+[node name="DrawLabel" type="Label" parent="Topbar/DrawNum"]
+margin_left = -52.0
+margin_top = -0.400002
+margin_right = -5.99997
+margin_bottom = 13.6
+rect_pivot_offset = Vector2( -181.6, 41.6 )
+text = "DRAW:"
+
+[node name="Effects" type="Label" parent="Topbar"]
+margin_left = 44.4
+margin_top = -7.59999
+margin_right = 61.4
+margin_bottom = 6.40001
+text = "{}"
+
+[node name="EffectLabel" type="Label" parent="Topbar/Effects"]
+margin_left = -52.0
+margin_top = -0.400002
+margin_right = -5.0
+margin_bottom = 30.6
+rect_pivot_offset = Vector2( -181.6, 41.6 )
+text = "EFFECT:
+"
 
 [connection signal="button_down" from="SubmitWord" to="." method="_submit_word"]
 [connection signal="value_changed" from="Player/Healthbar" to="." method="_on_player_damaged"]
