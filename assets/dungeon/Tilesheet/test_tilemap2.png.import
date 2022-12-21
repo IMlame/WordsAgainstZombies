@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/matthew_60x60.png-6147b03d36b0b71e65e3e085486b7174.stex"
+path="res://.import/test_tilemap2.png-6a7c8ff244834883b294ff637e73883f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Characters/character_art/matthew_60x60.png"
-dest_files=[ "res://.import/matthew_60x60.png-6147b03d36b0b71e65e3e085486b7174.stex" ]
+source_file="res://assets/dungeon/Tilesheet/test_tilemap2.png"
+dest_files=[ "res://.import/test_tilemap2.png-6a7c8ff244834883b294ff637e73883f.stex" ]
 
 [params]
 

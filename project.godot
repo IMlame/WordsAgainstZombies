@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "EnemyEnum",
 "language": "GDScript",
 "path": "res://src/battle/player_enemy/EnemyEnum.gd"
+}, {
+"base": "Reference",
+"class": "MapData",
+"language": "GDScript",
+"path": "res://src/dungeon/MapData.gd"
 } ]
 _global_script_class_icons={
 "CardData": "",
 "CardStateEnum": "",
 "EffectEnum": "",
-"EnemyEnum": ""
+"EnemyEnum": "",
+"MapData": ""
 }
 
 [application]
