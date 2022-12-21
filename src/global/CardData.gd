@@ -1,14 +1,14 @@
-extends Reference
+extends Resource
 
 class_name CardData
 
 const DEFAULT = preload("res://assets/cards/CardDatabase.gd").DATA
-var name = ""
-var damage = 0
-var draw_count = 0
-var word_count = 0
-var effects = ""
-var keywords = []
+export var name = ""
+export var damage = 0
+export var draw_count = 0
+export var word_count = 0
+export var effects = ""
+export var keywords = []
 
 enum {
 	NAME,
