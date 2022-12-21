@@ -14,11 +14,3 @@ func set_button_num(button_num: int):
 		text = "SAVE " + str(button_num) + ": Stage " + str(Saver.dungeon_info.stage)
 	else: 
 		text = "NEW GAME"
-
-
-func _on_SaveScreenButton2_pressed(extra_arg_0):
-	pass # Replace with function body.
-
-
-func _on_Save_Button_Pushed(extra_arg_0):
-	pass # Replace with function body.
